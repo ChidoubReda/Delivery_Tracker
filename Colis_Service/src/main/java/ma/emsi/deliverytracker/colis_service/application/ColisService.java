@@ -1,8 +1,10 @@
 package ma.emsi.deliverytracker.colis_service.application;
 
+import ma.emsi.deliverytracker.colis_service.api.dto.ColisResponse;
 import ma.emsi.deliverytracker.colis_service.api.dto.CreateColisCommand;
 import ma.emsi.deliverytracker.colis_service.domain.model.Colis;
 import ma.emsi.deliverytracker.colis_service.domain.repository.ColisRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,18 +15,12 @@ public class ColisService {
         this.colisRepository = colisRepository;
     }
 
-    public Colis createColis(CreateColisCommand command){
-        Colis colis = Colis.builder()
-                .trackingNumber(command.trackingNumber())
-                .senderName(command.senderName())
-                .senderAddress(command.senderAddress())
-                .senderEmail(command.senderEmail())
-                .recipientName(command.recipientName())
-                .recipientAddress(command.recipientAddress())
-                .recipientEmail(command.recipientEmail())
-                .weight(command.weight())
-                .status(command.status())
-                .build();
-        return colisRepository.save(colis);
+    public ColisResponse createColis(CreateColisCommand commandDto){
+        Colis colis = new Colis();
+        ColisResponse colisResponse = new ColisResponse();
+        BeanUtils.copyProperties(commandDto, colis);
+        colisRepository.save(colis);
+        BeanUtils.copyProperties(colis, colisResponse);
+        return colisResponse;
     }
 }

@@ -4,8 +4,7 @@ import ma.emsi.deliverytracker.colis_service.api.dto.CreateColisCommand;
 import ma.emsi.deliverytracker.colis_service.api.dto.ColisResponse;
 import ma.emsi.deliverytracker.colis_service.application.ColisService;
 import ma.emsi.deliverytracker.colis_service.domain.model.Colis;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 // API REST pour gérer les colis
@@ -20,9 +19,7 @@ public class ColisController {
     }
 
     @PostMapping
-    public ResponseEntity<ColisResponse> createColis(@RequestBody CreateColisCommand command) {
-        Colis colis = colisService.createColis(command);
-        ColisResponse response = ColisResponse.from(colis);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ColisResponse createColis(@RequestBody CreateColisCommand command) {
+        return colisService.createColis(command);
     }
 }

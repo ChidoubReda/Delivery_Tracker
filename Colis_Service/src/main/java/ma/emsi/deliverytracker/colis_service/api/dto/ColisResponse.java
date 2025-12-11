@@ -1,40 +1,33 @@
 package ma.emsi.deliverytracker.colis_service.api.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ma.emsi.deliverytracker.colis_service.domain.model.Colis;
 import ma.emsi.deliverytracker.colis_service.domain.model.Status;
 
 import java.util.Date;
 
 // DTO de réponse exposé par l'API
-public record ColisResponse(
-        Long id,
-        String trackingNumber,
-        String senderName,
-        String senderAddress,
-        String senderEmail,
-        String recipientName,
-        String recipientAddress,
-        String recipientEmail,
-        Double weight,
-        Status status,
-        Date createdAt,
-        Date expectedDeliveryDate
-) {
-    // Méthode utilitaire pour mapper un Colis domaine → DTO
-    public static ColisResponse from(Colis colis) {
-        return new ColisResponse(
-                colis.getId(),
-                colis.getTrackingNumber(),
-                colis.getSenderName(),
-                colis.getSenderAddress(),
-                colis.getSenderEmail(),
-                colis.getRecipientName(),
-                colis.getRecipientAddress(),
-                colis.getRecipientEmail(),
-                colis.getWeight(),
-                colis.getStatus(),
-                colis.getCreatedAt(),
-                colis.getExpectedDeliveryDate()
-        );
-    }
+@Getter @Setter
+@NoArgsConstructor
+public class ColisResponse {
+
+    private Long id;
+    private String trackingNumber;
+
+    private String senderName;
+    private String senderAddress;
+    private String senderEmail;
+
+    private String recipientName;
+    private String recipientAddress;
+    private String recipientEmail;
+
+    private Double weight;
+
+    private Status status;
+
+    private Date createdAt;
+    private Date expectedDeliveryDate;
 }
