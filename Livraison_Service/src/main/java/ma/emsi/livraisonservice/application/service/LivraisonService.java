@@ -2,12 +2,15 @@ package ma.emsi.livraisonservice.application.service;
 
 import ma.emsi.livraisonservice.api.dto.LivraisonRequest;
 import ma.emsi.livraisonservice.api.dto.LivraisonResponse;
+import ma.emsi.livraisonservice.domain.event.LivraisonEvent;
 import ma.emsi.livraisonservice.domain.model.EtatLivraison;
 import ma.emsi.livraisonservice.domain.model.Livraison;
 import ma.emsi.livraisonservice.domain.repository.LivraisonRepository;
 import ma.emsi.livraisonservice.infrastructure.client.ColisServiceClient;
 import ma.emsi.livraisonservice.infrastructure.client.GeoService;
 import ma.emsi.livraisonservice.infrastructure.client.dto.ColisDTO;
+import ma.emsi.livraisonservice.application.mapper.LivraisonMapper;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,12 +23,16 @@ public class LivraisonService {
     private final LivraisonRepository livraisonRepository;
     private final ColisServiceClient colisServiceClient;
     private final GeoService geoService;
+    private final LivraisonMapper livraisonMapper;
+    private final StreamBridge streamBridge;
 
     public LivraisonService(LivraisonRepository livraisonRepository, ColisServiceClient colisServiceClient,
-            GeoService geoService) {
+            GeoService geoService, LivraisonMapper livraisonMapper, StreamBridge streamBridge) {
         this.livraisonRepository = livraisonRepository;
         this.colisServiceClient = colisServiceClient;
         this.geoService = geoService;
+        this.livraisonMapper = livraisonMapper;
+        this.streamBridge = streamBridge;
     }
 
     public LivraisonResponse createLivraison(LivraisonRequest request) {
@@ -35,49 +42,36 @@ public class LivraisonService {
             throw new RuntimeException("Colis not found with ID: " + request.getColisId());
         }
 
-        // 2. Get Coordinates (just logging or storing for now, maybe in a separate
-        // field if Entity had it)
-        // For simplicity, we'll just call it to demonstrate usage.
-        // In a real app, we might store lat/lon in the entity.
+        // 2. Get Coordinates
         String coordinates = geoService.getCoordinates(request.getAdresseDestination()).block();
 
         // 3. Create Entity
-        Livraison livraison = Livraison.builder()
-                .colisId(request.getColisId())
-                .adresseDestination(request.getAdresseDestination())
-                .dateCreation(LocalDateTime.now())
-                .dateLivraisonPrevue(LocalDateTime.now().plusDays(3)) // Mock logic
-                .etat(EtatLivraison.PENDING)
-                .livreurId(request.getLivreurId())
+        Livraison livraison = livraisonMapper.toEntity(request);
+        livraison.setDateCreation(LocalDateTime.now());
+        livraison.setEtat(EtatLivraison.PENDING);
+
+        Livraison savedLivraison = livraisonRepository.save(livraison);
+
+        // 4. Publish Event (Async communication)
+        LivraisonEvent event = LivraisonEvent.builder()
+                .livraisonId(savedLivraison.getId())
+                .status(savedLivraison.getEtat().name())
                 .build();
 
-        Livraison saved = livraisonRepository.save(livraison);
+        streamBridge.send("livraisonOutput-out-0", event);
 
-        return mapToResponse(saved, coordinates);
+        return livraisonMapper.toResponse(savedLivraison, coordinates);
     }
 
     public List<LivraisonResponse> getAllLivraisons() {
         return livraisonRepository.findAll().stream()
-                .map(l -> mapToResponse(l, null))
+                .map(l -> livraisonMapper.toResponse(l, null))
                 .collect(Collectors.toList());
     }
 
     public LivraisonResponse getLivraisonById(Long id) {
         return livraisonRepository.findById(id)
-                .map(l -> mapToResponse(l, null))
+                .map(l -> livraisonMapper.toResponse(l, null))
                 .orElseThrow(() -> new RuntimeException("Livraison not found"));
-    }
-
-    private LivraisonResponse mapToResponse(Livraison livraison, String coordinates) {
-        return LivraisonResponse.builder()
-                .id(livraison.getId())
-                .colisId(livraison.getColisId())
-                .adresseDestination(livraison.getAdresseDestination())
-                .dateCreation(livraison.getDateCreation())
-                .dateLivraisonPrevue(livraison.getDateLivraisonPrevue())
-                .etat(livraison.getEtat())
-                .livreurId(livraison.getLivreurId())
-                .coordinates(coordinates)
-                .build();
     }
 }

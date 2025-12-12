@@ -19,7 +19,7 @@ public class ColisController {
     }
 
     @PostMapping
-    public ColisResponse createColis(@RequestBody CreateColisCommand command) {
+    public ColisResponse createColis(@RequestBody @jakarta.validation.Valid CreateColisCommand command) {
         return colisService.createColis(command);
     }
 }

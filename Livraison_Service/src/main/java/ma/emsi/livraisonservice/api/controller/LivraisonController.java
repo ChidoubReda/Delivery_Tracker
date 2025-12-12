@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +22,7 @@ public class LivraisonController {
     }
 
     @PostMapping
-    public ResponseEntity<LivraisonResponse> createLivraison(@RequestBody LivraisonRequest request) {
+    public ResponseEntity<LivraisonResponse> createLivraison(@RequestBody @Valid LivraisonRequest request) {
         return new ResponseEntity<>(livraisonService.createLivraison(request), HttpStatus.CREATED);
     }
 
