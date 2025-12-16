@@ -11,5 +11,10 @@ public interface LivraisonMapper {
     @Mapping(target = "coordinates", source = "coordinates")
     LivraisonResponse toResponse(Livraison livraison, String coordinates);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateCreation", ignore = true)
+    @Mapping(target = "dateLivraisonEffective", ignore = true)
+    @Mapping(target = "dateLivraisonPrevue", ignore = true) // Computed or set by logic?
+    @Mapping(target = "etat", ignore = true)
     Livraison toEntity(LivraisonRequest request);
 }

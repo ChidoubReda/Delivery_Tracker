@@ -4,7 +4,9 @@ public enum Status {
     CREATED,
     READY_FOR_PICKUP,
     IN_TRANSIT,
+    SHIPPED,
     DELIVERED,
+    RETURNED,
     CANCELED,
     LOST
 }

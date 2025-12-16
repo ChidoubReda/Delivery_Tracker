@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ma.emsi.deliverytracker.colis_service.domain.model.Status;
 import jakarta.validation.constraints.*;
+import java.time.LocalDate;
 
 // This DTO represents the input needed to create a Colis
 @Getter
@@ -39,4 +40,6 @@ public class CreateColisCommand {
     private Double weight;
 
     private Status status;
+
+    private LocalDate expectedDeliveryDate;
 }

@@ -23,4 +23,10 @@ public class ColisService {
         colis = colisRepository.save(colis);
         return colisMapper.toResponse(colis);
     }
+
+    public java.util.List<ColisResponse> getAllColis() {
+        return colisRepository.findAll().stream()
+                .map(colisMapper::toResponse)
+                .collect(java.util.stream.Collectors.toList());
+    }
 }

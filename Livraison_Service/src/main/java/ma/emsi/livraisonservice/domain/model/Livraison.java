@@ -31,4 +31,6 @@ public class Livraison {
     private EtatLivraison etat;
 
     private String livreurId;
+
+    private String coordinates;
 }

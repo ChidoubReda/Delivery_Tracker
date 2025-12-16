@@ -1,13 +1,17 @@
 package ma.emsi.livraisonservice.api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ma.emsi.livraisonservice.domain.model.EtatLivraison;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LivraisonResponse {
     private Long id;
     private Long colisId;
