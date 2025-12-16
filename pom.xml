@@ -5,14 +5,22 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.0</version>
+		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ma.emsi.deliverytracker</groupId>
 	<artifactId>Delivery_Tracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>Delivery_Tracker</name>
 	<description>Delivery_Tracker</description>
+	<modules>
+		<module>Configuration_Service</module>
+		<module>Discovery_Service</module>
+		<module>gateway_service</module>
+		<module>Colis_Service</module>
+		<module>Livraison_Service</module>
+	</modules>
 	<url/>
 	<licenses>
 		<license/>

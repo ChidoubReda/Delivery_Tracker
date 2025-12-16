@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///c:/School/School_5IIR/ArchitechtureDesComposantes/Delivery_Tracker/config-repo
+          uri: file:///c:/Users/RAZER/Documents/Emsi/5iir/Archi%20compo/Projet/Delivey%20project/Delivery_Tracker/config-repo
           default-label: main
 
 eureka:
