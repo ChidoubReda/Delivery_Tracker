@@ -1,0 +1,108 @@
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2025-12-18T12:17:20.829+01:00  INFO 13876 --- [livraison-service] [           main] m.e.l.LivraisonServiceApplication        : Starting LivraisonServiceApplication v0.0.1-SNAPSHOT using Java 17.0.17 with PID 13876 (C:\Users\RAZER\Documents\Emsi\5iir\Archi compo\Projet\Delivey project\Delivery_Tracker\Livraison_Service\target\livraison-service-0.0.1-SNAPSHOT.jar started by RAZER in C:\Users\RAZER\Documents\Emsi\5iir\Archi compo\Projet\Delivey project\Delivery_Tracker)
+2025-12-18T12:17:20.840+01:00  INFO 13876 --- [livraison-service] [           main] m.e.l.LivraisonServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-12-18T12:17:21.034+01:00  INFO 13876 --- [livraison-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:8888
+2025-12-18T12:17:21.034+01:00  INFO 13876 --- [livraison-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=livraison-service, profiles=[default], label=null, version=380cc5be1db7df8114147af37f9442a58215271d, state=
+2025-12-18T12:17:22.950+01:00  INFO 13876 --- [livraison-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-18T12:17:23.229+01:00  INFO 13876 --- [livraison-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 239 ms. Found 1 JPA repository interface.
+2025-12-18T12:17:23.934+01:00  INFO 13876 --- [livraison-service] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2025-12-18T12:17:23.962+01:00  INFO 13876 --- [livraison-service] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2025-12-18T12:17:24.337+01:00  INFO 13876 --- [livraison-service] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=5f9bf1e8-eaef-3a74-a2b1-8fbe24ae9877
+2025-12-18T12:17:26.103+01:00  INFO 13876 --- [livraison-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2025-12-18T12:17:26.191+01:00  INFO 13876 --- [livraison-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-18T12:17:26.191+01:00  INFO 13876 --- [livraison-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-12-18T12:17:26.493+01:00  INFO 13876 --- [livraison-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-18T12:17:26.497+01:00  INFO 13876 --- [livraison-service] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5444 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2025-12-18T12:17:26.625+01:00  INFO 13876 --- [livraison-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-18T12:17:27.546+01:00  INFO 13876 --- [livraison-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:livraisondb user=SA
+2025-12-18T12:17:27.548+01:00  INFO 13876 --- [livraison-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-18T12:17:27.558+01:00  INFO 13876 --- [livraison-service] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:livraisondb'
+2025-12-18T12:17:28.369+01:00  INFO 13876 --- [livraison-service] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-18T12:17:28.757+01:00  INFO 13876 --- [livraison-service] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.2.Final
+2025-12-18T12:17:28.970+01:00  INFO 13876 --- [livraison-service] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-18T12:17:29.371+01:00  INFO 13876 --- [livraison-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-18T12:17:29.436+01:00  WARN 13876 --- [livraison-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-18T12:17:29.470+01:00  INFO 13876 --- [livraison-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-18T12:17:30.618+01:00  INFO 13876 --- [livraison-service] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-18T12:17:30.705+01:00  INFO 13876 --- [livraison-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-18T12:17:31.509+01:00  WARN 13876 --- [livraison-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-18T12:17:32.330+01:00  INFO 13876 --- [livraison-service] [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'colis-service' URL not provided. Will try picking an instance via load-balancing.
+2025-12-18T12:17:32.972+01:00  WARN 13876 --- [livraison-service] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'livraisonController' defined in URL [jar:nested:/C:/Users/RAZER/Documents/Emsi/5iir/Archi%20compo/Projet/Delivey%20project/Delivery_Tracker/Livraison_Service/target/livraison-service-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ma/emsi/livraisonservice/api/controller/LivraisonController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'livraisonService' defined in URL [jar:nested:/C:/Users/RAZER/Documents/Emsi/5iir/Archi%20compo/Projet/Delivey%20project/Delivery_Tracker/Livraison_Service/target/livraison-service-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ma/emsi/livraisonservice/application/service/LivraisonService.class]: Unsatisfied dependency expressed through constructor parameter 3: No qualifying bean of type 'ma.emsi.livraisonservice.application.mapper.LivraisonMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-12-18T12:17:32.979+01:00  WARN 13876 --- [livraison-service] [           main] s.c.a.AnnotationConfigApplicationContext : Exception thrown from ApplicationListener handling ContextClosedEvent
+
+org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'applicationTaskExecutor': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:274) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.retrieveApplicationListeners(AbstractApplicationEventMulticaster.java:267) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.getApplicationListeners(AbstractApplicationEventMulticaster.java:223) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:145) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:460) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1163) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:114) ~[spring-cloud-context-4.2.0.jar!/:4.2.0]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:667) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:624) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1363) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:583) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1356) ~[spring-beans-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:640) ~[spring-context-6.2.0.jar!/:6.2.0]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.4.0.jar!/:3.4.0]
+	at ma.emsi.livraisonservice.LivraisonServiceApplication.main(LivraisonServiceApplication.java:20) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102) ~[livraison-service-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[livraison-service-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[livraison-service-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+
+2025-12-18T12:17:32.997+01:00  INFO 13876 --- [livraison-service] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-18T12:17:33.003+01:00  INFO 13876 --- [livraison-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-18T12:17:33.007+01:00  INFO 13876 --- [livraison-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-18T12:17:33.009+01:00  INFO 13876 --- [livraison-service] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-12-18T12:17:33.028+01:00  INFO 13876 --- [livraison-service] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-18T12:17:33.066+01:00 ERROR 13876 --- [livraison-service] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 3 of constructor in ma.emsi.livraisonservice.application.service.LivraisonService required a bean of type 'ma.emsi.livraisonservice.application.mapper.LivraisonMapper' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'ma.emsi.livraisonservice.application.mapper.LivraisonMapper' in your configuration.
+

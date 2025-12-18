@@ -49,6 +49,7 @@ public class LivraisonService {
         Livraison livraison = livraisonMapper.toEntity(request);
         livraison.setDateCreation(LocalDateTime.now());
         livraison.setEtat(EtatLivraison.PENDING);
+        livraison.setCoordinates(coordinates); // Persist the coordinates!
 
         Livraison savedLivraison = livraisonRepository.save(livraison);
 
@@ -60,18 +61,23 @@ public class LivraisonService {
 
         streamBridge.send("livraisonOutput-out-0", event);
 
-        return livraisonMapper.toResponse(savedLivraison, coordinates);
+        return livraisonMapper.toResponse(savedLivraison);
     }
 
     public List<LivraisonResponse> getAllLivraisons() {
-        return livraisonRepository.findAll().stream()
-                .map(l -> livraisonMapper.toResponse(l, null))
+        List<Livraison> livraisons = livraisonRepository.findAll();
+        // Debug Log
+        livraisons
+                .forEach(l -> System.out.println("DEBUG Service: ID=" + l.getId() + ", Coords=" + l.getCoordinates()));
+
+        return livraisons.stream()
+                .map(l -> livraisonMapper.toResponse(l))
                 .collect(Collectors.toList());
     }
 
     public LivraisonResponse getLivraisonById(Long id) {
         return livraisonRepository.findById(id)
-                .map(l -> livraisonMapper.toResponse(l, null))
+                .map(l -> livraisonMapper.toResponse(l)) // Use stored coordinates via entity
                 .orElseThrow(() -> new RuntimeException("Livraison not found"));
     }
 }

@@ -24,7 +24,7 @@ export const getLivraisonsList = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching livraisons:", error);
-        return [];
+        throw error; // Throw so UI can handle/display network error
     }
 };
 
