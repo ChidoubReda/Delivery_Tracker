@@ -1,0 +1,579 @@
+\documentclass[12pt]{report}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{lipsum} % For placeholder text if needed, but we will write real content
+
+% COULEURS
+\definecolor{beige}{RGB}{245,235,220}
+\definecolor{darkblue}{RGB}{0,51,102}
+
+% DEFINITIONS
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\listtablename}{Liste des tableaux}
+\renewcommand{\listfigurename}{Liste des figures}
+\renewcommand{\chaptername}{Chapitre}
+
+\begin{document}
+
+% =========================================================
+% PAGE DE GARDE
+% =========================================================
+\begin{titlepage}
+\begin{center}
+
+% Logos
+\begin{minipage}{0.45\textwidth}
+\raggedright
+\includegraphics[height=3cm]{images/logoemsi.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\raggedleft
+\includegraphics[height=3cm]{images/logo.png}
+\end{minipage}
+
+\vspace{3cm}
+
+% TITRE PRINCIPAL
+{\fontsize{45}{55}\selectfont \textbf{Rapport de projet académique}} \\[1.5cm]
+
+% SOUS-TITRE
+{\fontsize{24}{28}\selectfont \textit{Système de Suivi de Livraison Distribué \\ "Delivery Tracker"}} \\[3cm]
+
+% INFORMATIONS
+{\fontsize{16}{20}\selectfont
+\textbf{Filière :} 5\textsuperscript{ème} année IIR -- Groupe G5 \\[1cm]
+
+\begin{tabular}{p{9cm} p{7cm}}
+\textbf{Réalisé par :} & \textbf{Encadrant Académique :} \\
+M. Benazzouz Walid & M. Abdelaziz Ettaoufik \\
+M. Chidoub Reda & \\
+\end{tabular}
+}
+
+\vfill
+
+{\fontsize{16}{20}\selectfont \textbf{Année Universitaire :} 2025-2026}
+
+\end{center}
+\end{titlepage}
+
+% =========================================================
+% REMERCIEMENTS
+% =========================================================
+\chapter*{}
+\setcounter{page}{2} 
+\addcontentsline{toc}{chapter}{Remerciements}
+
+\vspace{-2cm}
+
+\begin{center}
+    {\fontsize{16}{20}\selectfont \textbf{Remerciements}}
+\end{center}
+
+\vspace{0.8cm}
+
+{\fontsize{12}{14}\selectfont 
+\setlength{\parindent}{1cm} 
+\setlength{\parskip}{0.8em} 
+\renewcommand{\baselinestretch}{1.2}\selectfont 
+\justifying
+Nous tenons à exprimer nos plus sincères remerciements à \textbf{Monsieur Abdelaziz Ettaoufik} pour son encadrement exemplaire, sa disponibilité constante et ses précieux conseils techniques tout au long de la réalisation de ce projet. Son expertise en architectures distribuées nous a permis de surmonter de nombreux défis et d'approfondir notre compréhension des systèmes microservices.
+
+Nous remercions également l’\textbf{École Marocaine des Sciences de l’Ingénieur (EMSI)} pour l'excellence de la formation dispensée et pour avoir mis à notre disposition un environnement académique propice à l'innovation et à l'apprentissage pratique.
+
+Enfin, nous remercions nos familles et nos collègues pour leur soutien inconditionnel et leurs encouragements durant cette période de travail intense.
+}
+
+% =========================================================
+% RÉSUMÉ
+% =========================================================
+\chapter*{}
+\addcontentsline{toc}{chapter}{Résumé}
+
+\vspace{-2cm}
+
+\begin{center}
+    {\fontsize{16}{20}\selectfont \textbf{Résumé}}
+\end{center}
+
+\vspace{1cm}
+
+{\fontsize{12}{14}\selectfont
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.8em}
+\renewcommand{\baselinestretch}{1.2}\selectfont
+\justifying
+Ce projet académique porte sur la conception et la réalisation d’une plateforme de suivi de livraison nommée \textbf{Delivery Tracker}, basée sur une architecture microservices moderne. Il s’inscrit dans le cadre de notre formation en ingénierie informatique et vise à mettre en application les concepts avancés de développement distribué avec l'écosystème \textbf{Spring Boot} et \textbf{Spring Cloud}.
+
+Le système est structuré autour de services métiers autonomes : un \textit{Colis-Service} pour la gestion administrative des expéditions et un \textit{Livraison-Service} pour l'orchestration logistique et le suivi géographique. La communication inter-services est assurée de manière fluide grâce à \textbf{OpenFeign}, tandis que la découverte des services et la configuration centralisée sont gérées respectivement par \textbf{Eureka} et \textbf{Spring Cloud Config}. L'accès au système est sécurisé et unifié par une \textbf{API Gateway}.
+
+En complément du backend, une interface utilisateur riche a été développée avec \textbf{React}. Elle intègre une cartographie interactive basée sur \textbf{Leaflet}, permettant de visualiser en temps réel la position des colis (ex. coordonnées GPS à Casablanca). Ce projet illustre concrètement les avantages d'une architecture découplée pour répondre aux besoins de scalabilité et de maintenabilité des systèmes logistiques actuels.
+}
+
+% =========================================================
+% ABSTRACT
+% =========================================================
+\chapter*{}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\vspace{-2cm}
+
+\begin{center}
+    {\fontsize{16}{20}\selectfont \textbf{Abstract}}
+\end{center}
+
+\vspace{1cm}
+
+{\fontsize{12}{14}\selectfont
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.8em}
+\renewcommand{\baselinestretch}{1.2}\selectfont
+\justifying
+This academic project focuses on the design and implementation of a distributed delivery tracking system named \textbf{Delivery Tracker}, leveraged by a microservices architecture. It aims to apply advanced concepts of the \textbf{Spring Boot} and \textbf{Spring Cloud} ecosystem within a realistic logistics context.
+
+The backend infrastructure relies on autonomous microservices: a \textit{Package Service} for shipment management and a \textit{Delivery Service} for logistics orchestration and geolocation. Inter-service communication is handled efficiently via \textbf{OpenFeign}, with reliable service discovery provided by \textbf{Eureka} and centralized configuration by \textbf{Spring Cloud Config}. An \textbf{API Gateway} serves as the secure entry point for all client requests.
+
+The frontend is built as a Single Page Application (SPA) using \textbf{React}, featuring a dynamic map integration with \textbf{Leaflet} to visualize real-time delivery locations (e.g., GPS coordinates in Casablanca). This project demonstrates the efficiency of decoupled architectures in building scalable and maintainable enterprise solutions.
+}
+
+% =========================================================
+% TABLES
+% =========================================================
+\clearpage
+\vspace{1cm}
+\tableofcontents
+\clearpage
+
+\addcontentsline{toc}{chapter}{Table des Figures}
+\vspace{1cm}
+\listoffigures
+
+% =========================================================
+% INTRODUCTION GÉNÉRALE
+% =========================================================
+\chapter*{}
+\addcontentsline{toc}{chapter}{Introduction Générale}
+
+\vspace{-2cm}
+
+\begin{center}
+    {\fontsize{16}{20}\selectfont \textbf{Introduction Générale}}
+\end{center}
+
+\vspace{0.7cm}
+
+{\fontsize{12}{14}\selectfont
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.8em}
+\renewcommand{\baselinestretch}{1.2}\selectfont
+\justifying
+
+L'essor du commerce électronique et la complexification des chaînes logistiques mondiales imposent aux entreprises de disposer de systèmes d'information agiles, robustes et capables de traiter des flux de données en temps réel. La traçabilité des colis n'est plus une option mais une exigence fondamentale des clients finaux, qui souhaitent connaître la position exacte de leur livraison à tout instant.
+
+Les architectures logicielles monolithiques, bien que simples à développer initialement, montrent rapidement leurs limites face à ces exigences de scalabilité et de disponibilité continue. L'architecture microservices s'est imposée comme la réponse standard de l'industrie pour construire des applications complexes, permettant de déployer, mettre à l'échelle et maintenir indépendamment chaque composant fonctionnel du système.
+
+C'est dans ce contexte que nous avons développé \textbf{Delivery Tracker}, une solution complète de suivi de livraison. L'objectif premier de ce projet est pédagogique : il s'agit de maîtriser la stack technologique \textbf{Spring Cloud} (Netflix Eureka, Gateway, Config Server, OpenFeign) et de comprendre les défis inhérents aux systèmes distribués (latence réseau, cohérence des données, découverte de services).
+
+Au-delà de l'aspect technique backend, ce projet met également l'accent sur l'expérience utilisateur avec le développement d'une interface \textbf{React} moderne, intégrant des fonctionnalités avancées comme la visualisation cartographique dynamique via \textbf{Leaflet}.
+
+Ce rapport détaille le cheminement complet du projet, de l'analyse des besoins à l'implémentation technique, en passant par la conception architecturale détaillée.
+}
+
+% =========================================================
+% CHAPITRE 1 : CONTEXTE GÉNÉRAL
+% =========================================================
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\vspace{0.5em}}
+\addcontentsline{toc}{chapter}{\textbf{\large Chapitre 1 : Contexte général du projet}}
+
+\vspace*{0.4\textheight}
+\begin{center}
+\colorbox{beige}{
+    \parbox{0.7\textwidth}{
+        \centering
+        {\fontsize{18}{22}\selectfont \textbf{Chapitre 1 :}}\\[0.4cm]
+        {\fontsize{14}{18}\selectfont Contexte général du projet}
+    }
+}
+\end{center}
+\clearpage
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{1. Introduction}}
+\addcontentsline{toc}{section}{1. Introduction}
+
+{\fontsize{12pt}{14pt}\selectfont
+\setlength{\parindent}{1cm}
+\justifying
+Ce chapitre introductif pose les bases du projet \textit{Delivery Tracker}. Il définit le cadre académique de sa réalisation, identifie la problématique métier à laquelle il répond et fixe les objectifs techniques et pédagogiques que nous nous sommes assignés.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{2. Contexte académique}}
+\addcontentsline{toc}{section}{2. Contexte académique}
+
+{\fontsize{12pt}{14pt}\selectfont
+Ce projet s'inscrit dans le cursus de 5\textsuperscript{ème} année de la filière Ingénierie Informatique et Réseaux (IIR) de l'EMSI. Il constitue le livrable pratique du module "Architectures Distribuées", supervisé par M. Abdelaziz Ettaoufik. L'exercice vise à dépasser la simple théorie pour confronter les étudiants aux réalités de l'implémentation d'un système distribué complet, intégrant des contraintes de communication réseau et de découpage modulaire.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{3. Problématique}}
+\addcontentsline{toc}{section}{3. Problématique}
+
+{\fontsize{12pt}{14pt}\selectfont
+Comment concevoir un système de suivi logistique qui soit à la fois performant, évolutif et maintenable dans le temps ? 
+Une approche centralisée classique créerait un point de défaillance unique et limiterait les possibilités d'évolution technologique ou fonctionnelle. La problématique centrale est donc de réussir à découpler les responsabilités métiers (gestion des colis vs gestion des livraisons) tout en maintenant une cohérence forte des données et une expérience utilisateur unifiée.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{4. Objectifs du projet}}
+\addcontentsline{toc}{section}{4. Objectifs du projet}
+
+{\fontsize{12pt}{14pt}\selectfont
+Les objectifs sont multiples :
+\begin{itemize}
+    \item \textbf{Techniques :} Mettre en œuvre une architecture microservices complète avec Spring Boot 3 et l'écosystème Spring Cloud 2024.
+    \item \textbf{Fonctionnels :} Offrir un service de suivi en temps réel avec géolocalisation sur carte.
+    \item \textbf{Architecturaux :} Assurer la haute disponibilité via le pattern de découverte de services (Eureka) et la résilience via une Gateway intelligente.
+    \item \textbf{IHM :} Développer une Single Page Application (SPA) réactive consommant des API REST.
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{5. Conclusion}}
+\addcontentsline{toc}{section}{5. Conclusion}
+
+{\fontsize{12pt}{14pt}\selectfont
+Ce chapitre a permis de cadrer le projet. Nous avons défini les enjeux de la transition vers les microservices dans le domaine logistique. Les chapitres suivants détailleront comment nous avons répondu à ces défis, en commençant par l'analyse détaillée des besoins.
+}
+
+% =========================================================
+% CHAPITRE 2 : ANALYSE DES BESOINS
+% =========================================================
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\vspace{0.5em}}
+\addcontentsline{toc}{chapter}{\textbf{\large Chapitre 2 : Analyse des besoins}}
+
+\vspace*{0.4\textheight}
+\begin{center}
+\colorbox{beige}{
+    \parbox{0.7\textwidth}{
+        \centering
+        {\fontsize{18}{22}\selectfont \textbf{Chapitre 2 :}}\\[0.4cm]
+        {\fontsize{14}{18}\selectfont Analyse des besoins}
+    }
+}
+\end{center}
+\clearpage
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{1. Introduction}}
+\addcontentsline{toc}{section}{1. Introduction}
+
+{\fontsize{12pt}{14pt}\selectfont
+L'analyse des besoins est l'étape cruciale qui traduit une vision métier en spécifications techniques. Pour \textit{Delivery Tracker}, nous avons identifié les acteurs du système et formalisé les cas d'utilisation essentiels.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{2. Besoins fonctionnels}}
+\addcontentsline{toc}{section}{2. Besoins fonctionnels}
+
+{\fontsize{12pt}{14pt}\selectfont
+Le système doit répondre aux exigences suivantes :
+
+\textbf{Module Gestion des Colis :}
+\begin{itemize}
+    \item Création d'un nouveau colis avec ses attributs (Poids, Expéditeur, Destinataire).
+    \item Consultation de la liste des colis existants.
+    \item Modification des informations administratives d'un colis.
+\end{itemize}
+
+\textbf{Module Suivi de Livraison :}
+\begin{itemize}
+    \item Association d'un processus de livraison à un colis existant.
+    \item Mise à jour en temps réel des coordonnées GPS (Latitude, Longitude).
+    \item Mise à jour des statuts de livraison (En préparation, En transit, Livré).
+    \item Visualisation cartographique de la position actuelle du livreur.
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{3. Besoins non fonctionnels}}
+\addcontentsline{toc}{section}{3. Besoins non fonctionnels}
+
+{\fontsize{12pt}{14pt}\selectfont
+\begin{itemize}
+    \item \textbf{Interopérabilité :} Les services doivent communiquer via des protocoles légers (REST/JSON).
+    \item \textbf{Découplage :} Une défaillance du service de livraison ne doit pas empêcher la consultation des colis.
+    \item \textbf{Ergonomie :} L'interface doit être intuitive et responsive.
+    \item \textbf{Modularité :} Le code doit être structuré pour faciliter l'ajout futur de fonctionnalités (ex: modules de paiement ou de notification).
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{4. Conclusion}}
+\addcontentsline{toc}{section}{4. Conclusion}
+
+{\fontsize{12pt}{14pt}\selectfont
+Nous avons clairement délimité le périmètre fonctionnel : un système centré sur le suivi opérationnel et géographique. Cette analyse guidera nos choix architecturaux présentés dans le chapitre suivant.
+}
+
+% =========================================================
+% CHAPITRE 3 : CONCEPTION
+% =========================================================
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\vspace{0.5em}}
+\addcontentsline{toc}{chapter}{\textbf{\large Chapitre 3 : Conception de la solution}}
+
+\vspace*{0.4\textheight}
+\begin{center}
+\colorbox{beige}{
+    \parbox{0.7\textwidth}{
+        \centering
+        {\fontsize{18}{22}\selectfont \textbf{Chapitre 3 :}}\\[0.4cm]
+        {\fontsize{14}{18}\selectfont Conception de la solution}
+    }
+}
+\end{center}
+\clearpage
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{1. Architecture Globale}}
+\addcontentsline{toc}{section}{1. Architecture Globale}
+
+{\fontsize{12pt}{14pt}\selectfont
+Nous avons opté pour une architecture microservices pure, orchestrée par les composants Spring Cloud.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/architecture.png}
+    \caption{Architecture Microservices du Delivery Tracker}
+    \label{fig:arch}
+\end{figure}
+
+Les composants clés sont :
+\begin{itemize}
+    \item \textbf{Config Server (Port 8888) :} Centralise les fichiers de configuration (application.yml) pour tous les services.
+    \item \textbf{Discovery Service (Eureka, Port 8761) :} Annuaire dynamique où chaque instance de service s'enregistre (Heartbeat pattern).
+    \item \textbf{API Gateway (Port 9999) :} Routeur intelligent qui dispatche les requêtes du frontend vers \texttt{colis-service} ou \texttt{livraison-service}.
+    \item \textbf{Microservices Métiers :}
+    \begin{itemize}
+        \item \texttt{colis-service} (8081) : Logique métier des colis.
+        \item \texttt{livraison-service} (8082) : Logique logistique et géolocalisation.
+    \end{itemize}
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{2. Communication Inter-services}}
+\addcontentsline{toc}{section}{2. Communication Inter-services}
+
+{\fontsize{12pt}{14pt}\selectfont
+Pour garantir la cohérence des données, le \texttt{Livraison-Service} doit vérifier l'existence d'un colis avant de planifier une livraison. Nous utilisons \textbf{Spring Cloud OpenFeign}, un client HTTP déclaratif, pour effectuer cet appel synchrone vers le \texttt{Colis-Service}. Cela abstrait la complexité des requêtes HTTP et permet une intégration fluide type "appel de méthode".
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{3. Modèle de Données}}
+\addcontentsline{toc}{section}{3. Modèle de Données}
+
+{\fontsize{12pt}{14pt}\selectfont
+Chaque microservice possède sa propre persistance (Database-per-service pattern), garantissant un couplage lâche.
+
+\textbf{Entité Colis :}
+\begin{itemize}
+    \item \texttt{id} (Long) : Identifiant unique.
+    \item \texttt{trackingNumber} (String) : Numéro de suivi métier (ex: TRK-2025-001).
+    \item \texttt{sender}, \texttt{recipient} : Informations acteurs.
+    \item \texttt{weight} : Poids du colis.
+\end{itemize}
+
+\textbf{Entité Livraison :}
+\begin{itemize}
+    \item \texttt{id} (Long) : Identifiant livraison.
+    \item \texttt{colisId} (Long) : Référence externe vers l'ID du colis (FK logique).
+    \item \texttt{coordinates} (String) : Position GPS (ex: "33.5731,-7.5898").
+    \item \texttt{etat} (Enum) : Statut (PENDING, IN\_TRANSIT, DELIVERED).
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{4. Conclusion}}
+\addcontentsline{toc}{section}{4. Conclusion}
+
+{\fontsize{12pt}{14pt}\selectfont
+L'architecture conçue est robuste et respecte les principes SOLID appliqués aux systèmes distribués. Elle prépare le terrain pour une implémentation flexible décrite au chapitre suivant.
+}
+
+% =========================================================
+% CHAPITRE 4 : RÉALISATION
+% =========================================================
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\vspace{0.5em}}
+\addcontentsline{toc}{chapter}{\textbf{\large Chapitre 4 : Réalisation et Développement}}
+
+\vspace*{0.4\textheight}
+\begin{center}
+\colorbox{beige}{
+    \parbox{0.7\textwidth}{
+        \centering
+        {\fontsize{18}{22}\selectfont \textbf{Chapitre 4 :}}\\[0.4cm]
+        {\fontsize{14}{18}\selectfont Réalisation et Développement}
+    }
+}
+\end{center}
+\clearpage
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{1. Environnement Technique}}
+\addcontentsline{toc}{section}{1. Environnement Technique}
+
+{\fontsize{12pt}{14pt}\selectfont
+\textbf{Backend :} Java 17, Spring Boot 3.4.0, Maven. \\
+\textbf{Frontend :} React 18, Vite, TailwindCSS, Leaflet. \\
+\textbf{Outils :} IntelliJ IDEA (Backend), VS Code (Frontend), PowerShell (Scripting).
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{2. Implémentation Backend}}
+\addcontentsline{toc}{section}{2. Implémentation Backend}
+
+{\fontsize{12pt}{14pt}\selectfont
+L'implémentation suit les best practices Spring :
+\begin{itemize}
+    \item \textbf{DTO Pattern :} Utilisation d'objets de transfert (Request/Response) pour découpler l'API du modèle interne.
+    \item \textbf{MapStruct :} Mapping automatique performant entre Entités et DTOs.
+    \item \textbf{Global Exception Handling :} Gestion centralisée des erreurs (@ControllerAdvice) pour des réponses API propres (404, 400, etc.).
+\end{itemize}
+
+Nous avons également développé un script PowerShell (\texttt{populate\_data.ps1}) pour automatiser l'injection de données de test, y compris des coordonnées GPS réalistes pour Casablanca.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{3. Interfaces Utilisateur (Frontend)}}
+\addcontentsline{toc}{section}{3. Interfaces Utilisateur (Frontend)}
+
+{\fontsize{12pt}{14pt}\selectfont
+
+\textbf{Dashboard :}
+Vue synthétique des statistiques (Total Colis, En transit, Livrés).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/dashboard.png}
+    \caption{Dashboard Principal}
+\end{figure}
+
+\textbf{Gestion des Colis :}
+Liste paginée des colis avec indicateurs de statut colorés.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/colis.png}
+    \caption{Interface de Gestion des Colis}
+\end{figure}
+
+\textbf{Suivi Cartographique :}
+Le cœur du module de livraison. Intégration de la librairie \texttt{Leaflet} consommant les tuiles OpenStreetMap. Les marqueurs sont positionnés dynamiquement selon les données reçues de l'API.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/cartetracking.png}
+    \caption{Suivi Géolocalisé sur Carte}
+\end{figure}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{4. Conclusion}}
+\addcontentsline{toc}{section}{4. Conclusion}
+
+{\fontsize{12pt}{14pt}\selectfont
+L'étape de réalisation a permis de concrétiser l'architecture théorique. L'intégration Frontend-Backend via l'API Gateway fonctionne de manière transparente, et la gestion des coordonnées GPS sur la carte apporte une véritable plus-value métier.
+}
+
+% =========================================================
+% CONCLUSION GÉNÉRALE
+% =========================================================
+\clearpage
+\thispagestyle{empty}
+\addtocontents{toc}{\vspace{0.5em}}
+\addcontentsline{toc}{chapter}{\textbf{\large Chapitre 5 : Conclusion et Perspectives}}
+
+\vspace*{0.4\textheight}
+\begin{center}
+\colorbox{beige}{
+    \parbox{0.7\textwidth}{
+        \centering
+        {\fontsize{18}{22}\selectfont \textbf{Chapitre 5 :}}\\[0.4cm]
+        {\fontsize{14}{18}\selectfont Conclusion et Perspectives}
+    }
+}
+\end{center}
+\clearpage
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{1. Bilan du projet}}
+\addcontentsline{toc}{section}{1. Bilan du projet}
+
+{\fontsize{12pt}{14pt}\selectfont
+Le projet \textit{Delivery Tracker} est une réussite tant sur le plan technique que fonctionnel. Nous avons réussi à déployer une infrastructure microservices complète, fonctionnelle et interconnectée. La maîtrise des flux de données entre services (via Feign) et vers le frontend (via Gateway) a été acquise.
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{2. Limites}}
+\addcontentsline{toc}{section}{2. Limites}
+
+{\fontsize{12pt}{14pt}\selectfont
+\begin{itemize}
+    \item \textbf{Sécurité :} Pas d'authentification (OAuth2/Keycloak) implémentée pour l'instant.
+    \item \textbf{Persistance :} Utilisation de bases H2 (in-memory) pour le développement, à migrer vers PostgreSQL pour la production.
+    \item \textbf{Tests :} Couverture de tests unitaires et d'intégration perfectible.
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{3. Perspectives}}
+\addcontentsline{toc}{section}{3. Perspectives}
+
+{\fontsize{12pt}{14pt}\selectfont
+Pour aller plus loin, nous envisageons :
+\begin{itemize}
+    \item \textbf{Sécurisation :} Intégration de Spring Security et Keycloak.
+    \item \textbf{Conteneurisation :} Création d'images Docker et orchestration via Kubernetes.
+    \item \textbf{Event-Driven :} Migration vers une communication asynchrone avec Apache Kafka pour une meilleure résilience.
+    \item \textbf{Mobile :} Développement d'une application mobile React Native pour les livreurs.
+\end{itemize}
+}
+
+\section*{\fontsize{16pt}{18pt}\selectfont \textbf{4. Mot de la fin}}
+\addcontentsline{toc}{section}{4. Mot de la fin}
+
+{\fontsize{12pt}{14pt}\selectfont
+Ce projet a été une expérience formatrice inestimable, nous préparant concrètement aux défis de l'ingénierie logicielle moderne. Il démontre la puissance et la flexibilité de l'écosystème Spring pour répondre aux besoins critiques des entreprises.
+}
+
+% =========================================================
+% BIBLIOGRAPHIE
+% =========================================================
+\chapter*{}
+\addcontentsline{toc}{chapter}{Bibliographie}
+
+\vspace{-2cm}
+
+\begin{center}
+    {\fontsize{16}{20}\selectfont \textbf{Bibliographie}}
+\end{center}
+
+\vspace{0.5cm}
+
+{\fontsize{12}{14}\selectfont 
+\setlength{\parindent}{1cm} 
+\setlength{\parskip}{0.8em} 
+\renewcommand{\baselinestretch}{1.2}\selectfont 
+\justifying 
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Documentation Officielle Spring} : \url{https://spring.io/projects/spring-boot}
+  \item \textbf{Spring Cloud Documentation} : \url{https://spring.io/projects/spring-cloud}
+  \item \textbf{Leaflet JS} (Documentation Interactive Maps) : \url{https://leafletjs.com/}
+  \item \textbf{React Documentation} : \url{https://react.dev/}
+  \item \textbf{Wolff, E.} (2016). \textit{Microservices: Flexible Software Architecture}. Addison-Wesley.
+  \item \textbf{Newman, S.} (2015). \textit{Building Microservices}. O'Reilly Media.
+\end{itemize}
+}
+
+\end{document}

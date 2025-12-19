@@ -29,4 +29,10 @@ public class ColisService {
                 .map(colisMapper::toResponse)
                 .collect(java.util.stream.Collectors.toList());
     }
+
+    public ColisResponse getColisById(Long id) {
+        Colis colis = colisRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Colis not found with ID: " + id));
+        return colisMapper.toResponse(colis);
+    }
 }

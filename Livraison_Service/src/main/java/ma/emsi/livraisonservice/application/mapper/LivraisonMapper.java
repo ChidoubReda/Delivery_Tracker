@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface LivraisonMapper {
     @Mapping(target = "coordinates", source = "coordinates")
-    LivraisonResponse toResponse(Livraison livraison, String coordinates);
+    LivraisonResponse toResponse(Livraison livraison);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dateCreation", ignore = true)
