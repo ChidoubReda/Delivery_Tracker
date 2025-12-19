@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Data
-public class LivraisonRequest {
+public record LivraisonRequest {
     @NotNull(message = "Colis ID is required")
     private Long colisId;
 
@@ -14,4 +14,6 @@ public class LivraisonRequest {
 
     @NotBlank(message = "Livreur ID is required")
     private String livreurId;
+
+    private String coordinates;
 }

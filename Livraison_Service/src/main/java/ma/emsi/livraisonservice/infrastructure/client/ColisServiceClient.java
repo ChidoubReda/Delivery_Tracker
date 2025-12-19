@@ -5,9 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "colis-service")
+@FeignClient(name = "colis-service", url = "http://localhost:8081")
 public interface ColisServiceClient {
 
-    @GetMapping("/api/colis/{id}")
+    @GetMapping("/colis/{id}")
     ColisDTO getColisById(@PathVariable("id") Long id);
 }

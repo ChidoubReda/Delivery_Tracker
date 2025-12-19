@@ -43,13 +43,18 @@ public class LivraisonService {
         }
 
         // 2. Get Coordinates
-        String coordinates = geoService.getCoordinates(request.getAdresseDestination()).block();
+        // String coordinates =
+        // geoService.getCoordinates(request.getAdresseDestination()).block();
 
         // 3. Create Entity
         Livraison livraison = livraisonMapper.toEntity(request);
         livraison.setDateCreation(LocalDateTime.now());
         livraison.setEtat(EtatLivraison.PENDING);
+<<<<<<< HEAD
         livraison.setCoordinates(coordinates); // Persist the coordinates!
+=======
+        // We set coordinates from request now, no need to overwrite
+>>>>>>> feature/livraison-service
 
         Livraison savedLivraison = livraisonRepository.save(livraison);
 
@@ -65,6 +70,7 @@ public class LivraisonService {
     }
 
     public List<LivraisonResponse> getAllLivraisons() {
+<<<<<<< HEAD
         List<Livraison> livraisons = livraisonRepository.findAll();
         // Debug Log
         livraisons
@@ -72,12 +78,20 @@ public class LivraisonService {
 
         return livraisons.stream()
                 .map(l -> livraisonMapper.toResponse(l))
+=======
+        return livraisonRepository.findAll().stream()
+                .map(livraisonMapper::toResponse)
+>>>>>>> feature/livraison-service
                 .collect(Collectors.toList());
     }
 
     public LivraisonResponse getLivraisonById(Long id) {
         return livraisonRepository.findById(id)
+<<<<<<< HEAD
                 .map(l -> livraisonMapper.toResponse(l)) // Use stored coordinates via entity
+=======
+                .map(livraisonMapper::toResponse)
+>>>>>>> feature/livraison-service
                 .orElseThrow(() -> new RuntimeException("Livraison not found"));
     }
 }

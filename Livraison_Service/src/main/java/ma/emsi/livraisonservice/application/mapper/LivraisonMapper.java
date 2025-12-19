@@ -8,6 +8,10 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface LivraisonMapper {
+<<<<<<< HEAD
+=======
+    @Mapping(target = "coordinates", source = "coordinates")
+>>>>>>> feature/livraison-service
     LivraisonResponse toResponse(Livraison livraison);
 
     @Mapping(target = "id", ignore = true)

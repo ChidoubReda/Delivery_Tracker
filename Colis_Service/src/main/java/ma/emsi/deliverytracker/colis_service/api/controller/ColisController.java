@@ -29,4 +29,9 @@ public class ColisController {
     public ResponseEntity<List<ColisResponse>> getAllColis() {
         return ResponseEntity.ok(colisService.getAllColis());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ColisResponse> getColisById(@PathVariable Long id) {
+        return ResponseEntity.ok(colisService.getColisById(id));
+    }
 }
